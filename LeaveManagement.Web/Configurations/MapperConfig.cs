@@ -7,8 +7,8 @@ namespace LeaveManagement.Web.Configurations
     public class MapperConfig : Profile
     {
         public MapperConfig() 
-        { 
-            CreateMap<LeaveType,LeaveTypeVM> 
+        {
+            CreateMap<LeaveType, LeaveTypeVM>().ReverseMap();
         }
     }
 }
