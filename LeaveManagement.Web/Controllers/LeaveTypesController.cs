@@ -45,8 +45,9 @@ namespace LeaveManagement.Web.Controllers
             {
                 return NotFound();
             }
+            var leaveTypeVM = mapper.Map<LeaveTypeVM>(await _context.LeaveTypes.FindAsync(id));
 
-            return View(leaveType);
+            return View(leaveTypeVM);
         }
 
         // GET: LeaveTypes/Create
