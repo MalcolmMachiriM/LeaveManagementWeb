@@ -32,6 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">My Leave</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Employees" asp-action="Index">Employees</a>
+                        </li>
                         @if (User.IsInRole(Roles.Administrator))
                         {
                             <li class="nav-item dropdown">
