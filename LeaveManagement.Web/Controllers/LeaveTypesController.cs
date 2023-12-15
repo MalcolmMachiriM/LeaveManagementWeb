@@ -19,10 +19,10 @@ namespace LeaveManagement.Web.Controllers
     {
         private readonly ILeaveTypeRepository leaveTypeRepository;
         private readonly IMapper mapper;
-        private readonly IleaveAllocationRepository leaveAllocationRepository;
+        private readonly ILeaveAllocationRepository leaveAllocationRepository;
 
         public LeaveTypesController(ILeaveTypeRepository leaveTypeRepository, IMapper mapper,
-            IleaveAllocationRepository leaveAllocationRepository)
+            ILeaveAllocationRepository leaveAllocationRepository)
         {
             this.leaveTypeRepository = leaveTypeRepository;
             this.mapper = mapper;
