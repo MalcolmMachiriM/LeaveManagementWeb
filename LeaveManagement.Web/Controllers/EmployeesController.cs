@@ -3,6 +3,7 @@ using LeaveManagement.Web.Constants;
 using LeaveManagement.Web.Contracts;
 using LeaveManagement.Web.Data;
 using LeaveManagement.Web.Models;
+using LeaveManagement.Web.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,16 +59,24 @@ namespace LeaveManagement.Web.Controllers
             }
         }
 
-        // GET: EmployeesController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: EmployeesController/EditAllocation/5
+        public async Task<ActionResult> EditAllocation(int id)
         {
-            return View();
+            var leaveAllocation = await leaveAllocationRepository.GetAsync(id);
+            if (leaveAllocation == null)
+            {
+                return NotFound();
+            }
+
+            var model = mapper.Map<LeaveAllocationEditVM>(leaveAllocation);
+            model.Employee = mapper.Map<EmployeeListVM>( await userManager.FindByIdAsync(leaveAllocation.EmployeeId));
+            return View(model);
         }
 
-        // POST: EmployeesController/Edit/5
+        // POST: EmployeesController/EditAllocation/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult EditAllocation(int id, IFormCollection collection)
         {
             try
             {

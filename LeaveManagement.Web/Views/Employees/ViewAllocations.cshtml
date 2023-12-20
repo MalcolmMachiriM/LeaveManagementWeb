@@ -55,11 +55,12 @@
                         <span class="sr-only">unread messages</span>
                     </button>
                 </h6>
+                <a asp-action="EditAllocation" class="btn btn-warning" asp-route-id="@allocation.Id"><i class="fa fa-pencil-alt"> </i>Edit Allocation</a>
             </li>
+
         }
     </ul>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
