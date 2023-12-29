@@ -62,14 +62,11 @@ namespace LeaveManagement.Web.Controllers
         // GET: EmployeesController/EditAllocation/5
         public async Task<ActionResult> EditAllocation(int id)
         {
-            var leaveAllocation = await leaveAllocationRepository.GetAsync(id);
-            if (leaveAllocation == null)
+            var model = await leaveAllocationRepository.GetEmployeeAllocation(id);
+            if (model == null)
             {
                 return NotFound();
             }
-
-            var model = mapper.Map<LeaveAllocationEditVM>(leaveAllocation);
-            model.Employee = mapper.Map<EmployeeListVM>( await userManager.FindByIdAsync(leaveAllocation.EmployeeId));
             return View(model);
         }
 
