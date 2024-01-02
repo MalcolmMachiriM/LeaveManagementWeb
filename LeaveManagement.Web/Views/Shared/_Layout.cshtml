@@ -7,10 +7,12 @@
     <title>@ViewData["Title"] - LeaveManagement.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LeaveManagement.Web.styles.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -75,6 +77,7 @@
     <script>
         $(function () {
             new DataTable('.table');
+            $(".datepicker").datepicker();
         });
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
