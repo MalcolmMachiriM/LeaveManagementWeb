@@ -13,5 +13,7 @@ namespace LeaveManagement.Web.Models
         public LeaveTypeVM LeaveType { get; set; }
         public bool? Approved { get; set; }
         public bool Cancelled { get; set; }
+        public string? RequestingEmployeeID { get; set; }
+        public EmployeeListVM Employee { get; set; }
     }
 }
