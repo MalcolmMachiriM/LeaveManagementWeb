@@ -40,20 +40,44 @@ namespace LeaveManagement.Web.Controllers
         // GET: LeaveRequests/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.LeaveRequests == null)
+            var model = await leaveRequestRepository.GetLeaveRequestAsync(id);
+            if (model == null)
             {
                 return NotFound();
             }
 
-            var leaveRequest = await _context.LeaveRequests
-                .Include(l => l.LeaveType)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (leaveRequest == null)
-            {
-                return NotFound();
-            }
+            return View(model);
+        }
 
-            return View(leaveRequest);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApproveRequest(int id, bool approved)
+        {
+            try
+            {
+                await leaveRequestRepository.ChangeApprovalStatus(id, approved);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            try
+            {
+                await leaveRequestRepository.CancelLeaveRequest(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return RedirectToAction(nameof(MyLeave));
         }
 
         // GET: LeaveRequests/Create
@@ -77,8 +101,13 @@ namespace LeaveManagement.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await leaveRequestRepository.CreateLeaveRequest(model);
-                    return RedirectToAction(nameof(Index));
+                    var isValidRequest = await leaveRequestRepository.CreateLeaveRequest(model);
+                    if (isValidRequest)
+                    {
+                        return RedirectToAction(nameof(MyLeave));
+                    }
+                    ModelState.AddModelError(string.Empty, "You've exceeded your allocation");
+
                 }
             }
             catch (Exception ex)

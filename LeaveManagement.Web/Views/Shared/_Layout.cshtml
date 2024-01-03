@@ -28,12 +28,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequests" asp-action="Create">Apply For Leave </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequests" asp-action="MyLeave">My Leave</a>
-                        </li>
+                        @if (User.IsInRole(Roles.User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequests" asp-action="Create">Apply For Leave </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequests" asp-action="MyLeave">My Leave</a>
+                            </li>
+
+                        }
                         @if (User.IsInRole(Roles.Administrator))
                         {
                             <li class="nav-item">

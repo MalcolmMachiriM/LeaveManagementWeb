@@ -24,7 +24,7 @@
                     <div class="col"><h6>@allocation.LeaveType.Name</h6></div>
                     <div class="col">
                         <button type="button" class="btn btn-primary">
-                            Allocated Days <span class="badge bg-light">@allocation.LeaveType.DefaultDays</span>
+                            Allocated Days <span class="badge bg-success">@allocation.LeaveType.DefaultDays</span>
                             <span class="sr-only">unread messages</span>
                         </button>
                     </div>
@@ -98,10 +98,19 @@
                         <span class="badge bg-danger">Rejected</span>
                     }
                 </td>
-                <td>
-                    <a asp-action="Cancel" class="btn btn-danger btn-sm" asp-route-id="@item.Id">Cancel Request</a> 
-                   
-                </td>
+               
+                    <td>
+                        @if (!item.Approved == null)
+                    {
+                        <form >
+                            <input asp-form="@item.Id" type="hidden">
+                            <button type="submit" class="btn btn-danger btn-sm">Cancel Request</button>
+                        </form>
+                    }
+                        
+
+                    </td>
+                
             </tr>
         }
     </tbody>
