@@ -58,7 +58,8 @@ namespace LeaveManagement.Web.Repositories
 
         public async Task UpdateAsync(T entity)
         {
-            context.Update(entity);
+            //context.Update(entity);
+            context.Entry(entity).State= EntityState.Modified;//same as commented since we are tracking
             await context.SaveChangesAsync();
         }
     }

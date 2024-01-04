@@ -81,6 +81,8 @@ namespace LeaveManagement.Web.Repositories
             var leaveType = await leaveTypeRepository.GetAsync(leaveTypeId);
             var allocations = new List<LeaveAllocation>();
 
+            var employeesWithNewAllocations = new List<Employee>();
+
             foreach (var employee in employees)
             {
                 if (await AllocationExists(employee.Id, leaveTypeId, period))
@@ -93,13 +95,15 @@ namespace LeaveManagement.Web.Repositories
                     Period = period,
                     NumberOfDays = leaveType.DefaultDays
                 });
+                employeesWithNewAllocations.Add( employee );
             }
             await AddRangeAsync(allocations);
 
-            foreach (var employee in employees)
+            foreach (var employee in employeesWithNewAllocations)
             {
-                await emailSender.SendEmailAsync(employee.Email, $"Leave Allocation Posted for {period} ", $"Your leave request from" +
-                    $"{leaveRequest.StartDate} to {leaveRequest.EndDate} has been {approvalStatus}");
+                
+                await emailSender.SendEmailAsync(employee.Email, $"Leave Allocation Posted for {period} ", $"Your leave {leaveType.Name} " +
+                    $" has been posted for the given period");
             }
         }
 
