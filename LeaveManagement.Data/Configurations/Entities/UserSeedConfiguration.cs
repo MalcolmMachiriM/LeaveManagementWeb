@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace LeaveManagement.Web.Configurations.Entities
+namespace LeaveManagement.Data.Configurations.Entities
 {
     public class UserSeedConfiguration : IEntityTypeConfiguration<Employee>
     {

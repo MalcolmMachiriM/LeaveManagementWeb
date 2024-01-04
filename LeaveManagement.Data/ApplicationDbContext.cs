@@ -1,4 +1,4 @@
-﻿using LeaveManagement.Web.Configurations.Entities;
+﻿using LeaveManagement.Data.Configurations.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

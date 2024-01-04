@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace LeaveManagement.Web.Configurations.Entities
+namespace LeaveManagement.Data.Configurations.Entities
 {
     internal class UserRoleSeedConfiguration : IEntityTypeConfiguration<IdentityUserRole<string>>
     {
