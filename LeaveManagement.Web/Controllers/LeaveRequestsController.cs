@@ -18,11 +18,14 @@ namespace LeaveManagement.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILeaveRequestRepository leaveRequestRepository;
+        private readonly ILogger<LeaveRequestsController> logger;
 
-        public LeaveRequestsController(ApplicationDbContext context, ILeaveRequestRepository leaveRequestRepository)
+        public LeaveRequestsController(ApplicationDbContext context, 
+            ILeaveRequestRepository leaveRequestRepository, ILogger<LeaveRequestsController> logger)
         {
             _context = context;
             this.leaveRequestRepository = leaveRequestRepository;
+            this.logger = logger;
         }
         [Authorize(Roles = Roles.Administrator)]
         // GET: LeaveRequests
@@ -59,7 +62,7 @@ namespace LeaveManagement.Web.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.LogError(ex,"Error Approving Leave Request");
                 throw;
             }
             return RedirectToAction(nameof(Index));
@@ -74,7 +77,7 @@ namespace LeaveManagement.Web.Controllers
             }
             catch (Exception ex)
             {
-
+                logger.LogError(ex, "Error Cancelling Leave Request");
                 throw;
             }
             return RedirectToAction(nameof(MyLeave));
@@ -112,6 +115,7 @@ namespace LeaveManagement.Web.Controllers
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error Creating Leave Request");
                 ModelState.AddModelError(string.Empty, "An Error Has Occurred. Please Try Again Later");
             }
             
@@ -155,7 +159,7 @@ namespace LeaveManagement.Web.Controllers
                     _context.Update(leaveRequest);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     if (!LeaveRequestExists(leaveRequest.Id))
                     {
@@ -163,6 +167,7 @@ namespace LeaveManagement.Web.Controllers
                     }
                     else
                     {
+                        logger.LogError(ex, "Error Cancelling Leave Request");
                         throw;
                     }
                 }
