@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using LeaveManagement.Web.Data;
-using AutoMapper;
-using LeaveManagement.Web.Models;
+﻿using AutoMapper;
+using LeaveManagement.Common.Constants;
+using LeaveManagement.Data;
 using LeaveManagement.Web.Contracts;
+using LeaveManagement.Web.Models;
 using Microsoft.AspNetCore.Authorization;
-using LeaveManagement.Web.Constants;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagement.Web.Controllers
 {
-    [Authorize(Roles =Roles.Administrator)]
+    [Authorize(Roles = Roles.Administrator)]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository leaveTypeRepository;
@@ -33,9 +28,9 @@ namespace LeaveManagement.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var leaveTypes = mapper.Map<List<LeaveTypeVM>>(await leaveTypeRepository.GetAllAsync());//select * from leavetypes
-              return leaveTypeRepository.GetAllAsync() != null ? 
-                          View(leaveTypes) :
-                          Problem("Entity set 'ApplicationDbContext.LeaveTypes'  is null.");
+            return leaveTypeRepository.GetAllAsync() != null ?
+                        View(leaveTypes) :
+                        Problem("Entity set 'ApplicationDbContext.LeaveTypes'  is null.");
         }
 
         // GET: LeaveTypes/Details/5
@@ -64,7 +59,7 @@ namespace LeaveManagement.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.Administrator)]
-        public async Task<IActionResult> Create( LeaveTypeVM leaveTypeVM)
+        public async Task<IActionResult> Create(LeaveTypeVM leaveTypeVM)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +114,7 @@ namespace LeaveManagement.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (! await leaveTypeRepository.Exists(leaveTypeVM.Id))
+                    if (!await leaveTypeRepository.Exists(leaveTypeVM.Id))
                     {
                         return NotFound();
                     }
@@ -133,14 +128,14 @@ namespace LeaveManagement.Web.Controllers
             return View(leaveTypeVM);
         }
 
-        
+
         // POST: LeaveTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.Administrator)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            
+
             await leaveTypeRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
@@ -151,9 +146,9 @@ namespace LeaveManagement.Web.Controllers
         public async Task<IActionResult> AllocateLeave(int id)
         {
             await leaveAllocationRepository.LeaveAllocation(id);
-            return RedirectToAction(nameof (Index));
+            return RedirectToAction(nameof(Index));
         }
 
-       
+
     }
 }

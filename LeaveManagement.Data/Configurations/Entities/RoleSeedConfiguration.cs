@@ -1,4 +1,4 @@
-﻿using LeaveManagement.Web.Constants;
+﻿using LeaveManagement.Common.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
