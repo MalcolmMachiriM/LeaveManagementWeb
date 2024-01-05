@@ -1,8 +1,6 @@
-﻿using LeaveManagement.Data;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace LeaveManagement.Web.Models
+namespace LeaveManagement.Common.Models
 {
     public class LeaveRequestVM : LeaveRequestCreateVM
     {

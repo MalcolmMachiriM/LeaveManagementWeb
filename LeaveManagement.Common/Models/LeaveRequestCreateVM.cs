@@ -1,9 +1,8 @@
-﻿using LeaveManagement.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LeaveManagement.Web.Models
+namespace LeaveManagement.Common.Models
 {
     public class LeaveRequestCreateVM : IValidatableObject
     {
