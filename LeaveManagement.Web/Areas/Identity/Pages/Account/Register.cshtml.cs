@@ -2,24 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+using LeaveManagement.Common.Constants;
 using LeaveManagement.Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-using LeaveManagement.Common.Constants;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace LeaveManagement.Web.Areas.Identity.Pages.Account
 {
@@ -89,11 +82,11 @@ namespace LeaveManagement.Web.Areas.Identity.Pages.Account
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-            [Display(Name ="Date of Birth")]
+            [Display(Name = "Date of Birth")]
             [DataType(DataType.DateTime)]
             public DateTime? DateOfBirth { get; set; }
 
-            [Display(Name ="Date Joined")]
+            [Display(Name = "Date Joined")]
             [DataType(DataType.DateTime)]
             public DateTime? DateJoined { get; set; }
 
